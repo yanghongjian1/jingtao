@@ -1,0 +1,112 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    useGlobalDataSourceStat: true
+  #MySQL
+  write:
+    datasource:
+      #      url: jdbc:mysql://localhost:3306/jtdb?useUnicode=true&characterEncoding=UTF-8
+      url: jdbc:mysql://192.168.159.66:8066/jtdb?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      initializeSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunMillis: 60000
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testonReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+
+
+
+  #  mvc:
+  #    static-path-pattern: /webapp/**
+  #    view:
+  #      prefix: /WEB-INF/views/
+  #      suffix: .jsp
+  #  mvc:
+  #    view:
+  #      prefix: /WEB-INF/views/
+  #      suffix: .jsp
+
+  #MySQL
+  read:
+    datasource:
+      url: jdbc:mysql://192.168.159.66:8067/jtdb?characterEncoding=utf8&useSSL=false&autoReconnect=true&allowMasterDownConnections=true
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      initializeSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunMillis: 60000
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testonReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+
+  dubbo:
+    application:            #应用配置，用于配置当前应用信息，不管该应用是提供者还是消费者。
+      name: order-Consumer
+    registry:                 #注册中心配置，用于配置连接注册中心相关信息。
+      address: zookeeper://192.168.159.111:2181
+    protocol:     #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。
+      name: dubbo
+      port: 20880
+    scan: com.jingtao.jtmanage.manage.api.controller  #服务暴露与发现消费所在的package
+
+
+#工具类
+common:
+  swagger-open: true
+  mybaties-open: false
+#  sqlSessionFactoryBean-openserver: false
+server:
+  #端口号
+  port: 8093
+  #项目名，如果不设定，默认是 /
+
+
+#Log
+logging:
+  #启动脚本可以配置路径
+  #  config: classpath:logback-spring.xml
+  file: jt-web.log
+  root: INFO
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.jdbc: DEBUG
+    com.jingtao: INFO
+    com.jingtao.jtmanage.manage.api.dao: DEBUG
+#    com.isoftstone.app.ocrface.api.client: ERROR
+#    com.isoftstone.app.health.api.dao: DEBUG
+
+
+
+redis:
+  nodes: 192.168.159.100:7000,192.168.159.100:7001,192.168.159.100:7002,192.168.159.100:7003,192.168.159.100:7004,192.168.159.100:7005,192.168.159.100:7006,192.168.159.100:7007,192.168.159.100:7008
+  commandTimeout: 10000  #redis操作的超时时间
+  maxTotal: 5000 #最大连接数
+  maxIdle: 30 #最大空闲连接数
+  minIdle: 5 #最小空闲连接数
+  maxWait: 3000  #获取连接最大等待时间 ms  #default -1
+  pwd:
+
+manage:
+  #  url: http://192.168.159.144:8091
+  url: http://192.168.159.144:8091
+sso:
+  #  url: http://192.168.159.144:8091
+  url: http://192.168.159.144:8094

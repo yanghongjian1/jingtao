@@ -1,0 +1,8 @@
+server:
+  #端口号
+  port: 8088
+  #项目名，如果不设定，默认是 /
+  context-path: /app
+
+common:
+  swagger-open: false

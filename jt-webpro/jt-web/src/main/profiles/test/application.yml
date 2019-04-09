@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: test
+  application:
+    name: jt-manage
+  sleuth:
+    integration:
+      enabled: false
+    sampler:
+      percentage: 1
+    scheduled:
+      skip-pattern: ^org.*HystrixStreamTask$
+  #  mvc:
+  #    static-path-pattern: /static/**
+  #    view:
+  #      prefix: /WEB-INF/view
+
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      max-request-size: 10MB
+
+
+
