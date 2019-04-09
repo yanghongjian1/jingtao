@@ -27,3 +27,9 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+
+*.log
+*.target
+*.log.*
+*.idea
+.idea
